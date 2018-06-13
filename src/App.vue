@@ -26,14 +26,23 @@ function preencheDados(dados){
     var divInfo = document.createElement('div');
     var divTop = document.createElement('div');
     divInfo.setAttribute('id', 'painel');
-    divTop.setAttribute('id', 'painel-top');
     var imgClima = document.createElement('img');
     var pNome = document.createElement('h2');
     pNome.setAttribute('id', 'painel-titulo');
+    var pTemp = document.createElement('p');
+    var pTempmax = document.createElement('p');
+    var pTempmin = document.createElement('p');
     imgClima.src = "http://openweathermap.org/img/w/" +  clima.weather[0].icon + ".png"
     pNome.innerHTML = clima.name;
-    divInfo.appendChild(imgClima);
+    pTemp.innerHTML = "Temperatura atual: " + clima.main.temp.toFixed(1);
+    pTempmax.innerHTML = "Temperatura máxima: " + clima.main.temp_max.toFixed(1);
+    pTempmin.innerHTML = "Temperatura mínima: " + clima.main.temp_min.toFixed(1);
     divInfo.appendChild(pNome);
+    divInfo.appendChild(pNome);
+    divInfo.appendChild(pTemp);
+    divInfo.appendChild(pTempmax);
+    divInfo.appendChild(pTempmin);
+    divInfo.appendChild(imgClima);
     document.body.appendChild(divInfo);
 }
 
@@ -45,8 +54,7 @@ export default {
     
     data() {
       return {
-      pesquisa: '',
-      status: ''
+      pesquisa: ''
     };
   },
   
@@ -67,7 +75,7 @@ export default {
 			    preencheDados(dados);
 			
 			}, response => {
-               this.status = "Cidade nao encontrada";
+               alert("Cidade nao encontrada");
         });
       
     }
