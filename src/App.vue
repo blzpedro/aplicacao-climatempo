@@ -133,4 +133,29 @@ input{
     font-size: 20px;
     opacity: 0.8;
 }
+
+#painel {
+    padding: 0 auto;
+    border: solid 2px grey;
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 3px 5px 5px grey;
+    width: 250px;
+    height: 420px;
+    vertical-align: top;
+    text-align: center;
+    background-color: #d9d9d9;
+}
+
+#painel #painel-titulo {
+    text-align: center;
+    border: solid 1px;
+    background: lightblue;
+    margin: 0 0 20px 0;
+    padding: 0;
+    text-transform: uppercase;
+    height: 60px;
+    width: 100%;
+    display: inline-table;
+} 
 </style>
