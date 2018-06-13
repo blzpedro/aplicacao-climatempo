@@ -2,7 +2,7 @@
   <div>
     <cabeca></cabeca>
     <div id="mid">
-      <input type="text" v-model="pesquisa" placeholder="ex: Santos">
+      <input id="campo"  type="text" v-model="pesquisa" placeholder="ex: Santos">
       <button v-on:click="geraJSON">Pesquisar</button>
       <button v-on:click="limpar" >Limpar</button>
     </div>
@@ -65,7 +65,7 @@ export default {
     
     data() {
       return {
-      pesquisa: ''
+      pesquisa: '',
     };
   },
   
@@ -98,10 +98,13 @@ export default {
         .then(res => res.json())
         .then(dados => {
           
+          this.pesquisa ='';
+          this.status='';
+          document.getElementById('campo').value='';
 			    preencheDados(dados);
 			
 			}, response => {
-               alert("Cidade nao encontrada");
+               alert("Cidade não encontrada");
         });
       
     }
