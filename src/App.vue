@@ -4,12 +4,39 @@
     <div id="mid">
       <input type="text" v-model="pesquisa" placeholder="ex: Santos">
       <button v-on:click="geraJSON">Pesquisar</button>
+      <p>{{ status }}</p>
     </div>
   </div>
 </template>
 
 <script>
 import Cabeca from './assets/components/shared/header/Cabeca.vue';
+
+
+      /***
+      * DESCRICAO: Essa funcao recebe um json com os dados do clima da cidade especificada e cria um painel na pagina index.html
+      * AUTOR: Henrique / Gabriel / Pedro
+      * ENTRADA : Recebe o objeto da funcao geraJSON
+      * SAIDA: 
+      ***/
+function preencheDados(dados){
+
+    var clima = dados;
+    
+    var divInfo = document.createElement('div');
+    var divTop = document.createElement('div');
+    divInfo.setAttribute('id', 'painel');
+    divTop.setAttribute('id', 'painel-top');
+    var imgClima = document.createElement('img');
+    var pNome = document.createElement('h2');
+    pNome.setAttribute('id', 'painel-titulo');
+    imgClima.src = "http://openweathermap.org/img/w/" +  clima.weather[0].icon + ".png"
+    pNome.innerHTML = clima.name;
+    divInfo.appendChild(imgClima);
+    divInfo.appendChild(pNome);
+    document.body.appendChild(divInfo);
+}
+
 
 export default {
     components: {
@@ -18,11 +45,13 @@ export default {
     
     data() {
       return {
-      pesquisa: ''
+      pesquisa: '',
+      status: ''
     };
   },
   
   methods:{
+    
       /***
       * DESCRICAO: Funcao que faz a requisicao da api e retorna um json com os dados, caso nao encontra a cidade dispara um alert.
       * AUTOR: Henrique
@@ -35,10 +64,10 @@ export default {
         .then(res => res.json())
         .then(dados => {
           
-			    alert(dados);
+			    preencheDados(dados);
 			
 			}, response => {
-                alert("Cidade não encontrada.");
+               this.status = "Cidade nao encontrada";
         });
       
     }
