@@ -1,9 +1,9 @@
 <template>
   <div>
     <cabeca></cabeca>
-    <div>
-      <input type="text" placeholder="ex: Santos">
-      <button>Pesquisar</button>
+    <div id="mid">
+      <input type="text" v-model="pesquisa" placeholder="ex: Santos">
+      <button v-on:click="geraJSON">Pesquisar</button>
     </div>
   </div>
 </template>
@@ -14,8 +14,36 @@ import Cabeca from './assets/components/shared/header/Cabeca.vue';
 export default {
     components: {
       'cabeca': Cabeca, 
+    },
+    
+    data() {
+      return {
+      pesquisa: ''
+    };
+  },
+  
+  methods:{
+      /***
+      * DESCRICAO: Funcao que faz a requisicao da api e retorna um json com os dados, caso nao encontra a cidade dispara um alert.
+      * AUTOR: Henrique
+      * ENTRADA :
+      * SAIDA: JSON
+         ***/
+      geraJSON: function () {
+      
+        this.$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.pesquisa + '&APPID=d88c03f3eb8efe8c97422955694012c9&lang=pt&units=metric')
+        .then(res => res.json())
+        .then(dados => {
+          
+			    alert(dados);
+			
+			}, response => {
+                alert("Cidade não encontrada.");
+        });
+      
     }
-}
+  }
+};
 </script>
 
 <style>
