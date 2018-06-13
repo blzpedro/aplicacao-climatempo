@@ -1,5 +1,8 @@
 <template>
     <div>
+        <a href="https://www.openweathermap.org/">
+            <img src="img/api-icon.png" id="iconapi">
+        </a>
         <div id="bg1">
             <h1>{{ titulo }}</h1>
         </div>
@@ -34,5 +37,10 @@ export default {
 
 h3{
     text-align: center;
+}
+
+#iconapi{
+    width: 95px;
+    float: left;
 }
 </style>
