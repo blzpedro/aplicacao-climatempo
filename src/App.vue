@@ -1,12 +1,16 @@
 <template>
   <div>
-
+    <cabeca></cabeca>
   </div>
 </template>
 
 <script>
-export default {
+import Cabeca from './assets/components/shared/header/Cabeca.vue';
 
+export default {
+    components: {
+      'cabeca': Cabeca,    
+    }
 }
 </script>
 
