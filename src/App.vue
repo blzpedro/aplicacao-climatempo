@@ -1,6 +1,10 @@
 <template>
   <div>
     <cabeca></cabeca>
+    <div>
+      <input type="text" placeholder="ex: Santos">
+      <button>Pesquisar</button>
+    </div>
   </div>
 </template>
 
@@ -9,7 +13,7 @@ import Cabeca from './assets/components/shared/header/Cabeca.vue';
 
 export default {
     components: {
-      'cabeca': Cabeca,    
+      'cabeca': Cabeca, 
     }
 }
 </script>
@@ -25,4 +29,6 @@ background-image: url("img/ceu.png");
 background-size: 100%;
 background-repeat: no-repeat;
 }
+
+
 </style>
