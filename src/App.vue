@@ -158,4 +158,24 @@ input{
     width: 100%;
     display: inline-table;
 } 
+
+p{
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+div p{
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    padding: 10px 0;
+}
+
+h2 img{
+    float: left;
+    height: 40px;
+    width: 50px;
+    margin-right: -5px;
+}
 </style>
