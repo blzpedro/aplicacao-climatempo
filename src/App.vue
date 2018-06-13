@@ -4,7 +4,7 @@
     <div id="mid">
       <input type="text" v-model="pesquisa" placeholder="ex: Santos">
       <button v-on:click="geraJSON">Pesquisar</button>
-      <p>{{ status }}</p>
+      <button v-on:click="limpar" >Limpar</button>
     </div>
   </div>
 </template>
@@ -70,6 +70,21 @@ export default {
   },
   
   methods:{
+    
+          
+      /***
+      * DESCRICAO: Função para remover os painéis das cidades pesquisadas.
+      * AUTOR: Gabriel
+      * ENTRADA : 
+      * SAIDA:
+      ***/
+      limpar: function() {
+        
+        while ('painel.value' != 0 ){
+          document.getElementById('painel').remove();
+        }
+      },
+    
     
       /***
       * DESCRICAO: Funcao que faz a requisicao da api e retorna um json com os dados, caso nao encontra a cidade dispara um alert.
