@@ -32,17 +32,29 @@ function preencheDados(dados){
     var pTemp = document.createElement('p');
     var pTempmax = document.createElement('p');
     var pTempmin = document.createElement('p');
+    var pDescricao = document.createElement('p');
+    var pUmidade = document.createElement('p');
+    var pVelvento = document.createElement('p');
+    var pSigla = document.createElement('h4');
     imgClima.src = "http://openweathermap.org/img/w/" +  clima.weather[0].icon + ".png"
     pNome.innerHTML = clima.name;
     pTemp.innerHTML = "Temperatura atual: " + clima.main.temp.toFixed(1);
     pTempmax.innerHTML = "Temperatura máxima: " + clima.main.temp_max.toFixed(1);
     pTempmin.innerHTML = "Temperatura mínima: " + clima.main.temp_min.toFixed(1);
-    divInfo.appendChild(pNome);
+    pUmidade.innerHTML = "Umidade: " + clima.main.humidity +"%";
+    pVelvento.innerHTML = "Ventos: " + (3.6 * clima.wind.speed).toFixed(2) + " km/h";
+    pDescricao.innerHTML = "Descrição: " + clima.weather[0].description;
+    pSigla.innerHTML = clima.sys.country;
     divInfo.appendChild(pNome);
     divInfo.appendChild(pTemp);
     divInfo.appendChild(pTempmax);
     divInfo.appendChild(pTempmin);
+    divInfo.appendChild(pUmidade);
+    divInfo.appendChild(pVelvento);
+    divInfo.appendChild(pDescricao);
+    divInfo.appendChild(divTop);
     divInfo.appendChild(imgClima);
+    pNome.appendChild(pSigla);
     document.body.appendChild(divInfo);
 }
 
