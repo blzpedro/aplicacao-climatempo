@@ -3,6 +3,9 @@
         <a href="https://www.openweathermap.org/">
             <img src="img/api-icon.png" id="iconapi">
         </a>
+        <a href="https://vuejs.org/">
+            <img src="img/vue.png" id="vueapi">
+        </a>
         <div id="bg1">
             <h1>{{ titulo }}</h1>
         </div>
@@ -42,5 +45,10 @@ h3{
 #iconapi{
     width: 95px;
     float: left;
+}
+
+#vueapi{
+    width: 100px;
+    float: right;
 }
 </style>
