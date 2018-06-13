@@ -26,13 +26,15 @@ export default {
 
 <style>
 #bg1{
-    background: linear-gradient(to right, #ccffff, #99ccff, #3399ff, #0066ff); 
-    margin-top: 0;
-    height: 80px;
+   background-color: rgba(255,255,255,0.6);
+    /*background: linear-gradient(to right, #ccffff, #99ccff, #3399ff, #0066ff, 1); */
+    border-bottom: 1.5px solid black;
+    height: 100px;
+    font-size: 1.6em;
 }
 
 #bg1 h1{
-    margin: 0;
+    margin: 0 200px;
     position: relative;
     top: 20px;
     text-align: center;
