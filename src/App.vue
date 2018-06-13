@@ -52,8 +52,7 @@ function preencheDados(dados){
     divInfo.appendChild(pUmidade);
     divInfo.appendChild(pVelvento);
     divInfo.appendChild(pDescricao);
-    divInfo.appendChild(divTop);
-    divInfo.appendChild(imgClima);
+    pNome.appendChild(imgClima);
     pNome.appendChild(pSigla);
     document.body.appendChild(divInfo);
 }
@@ -177,5 +176,22 @@ h2 img{
     height: 40px;
     width: 50px;
     margin-right: -5px;
+}
+
+#painel p img{
+  position: relative;
+  bottom: 10px;
+  width: 30px;
+  float: left;
+  margin-left: -10px;
+  margin-right: 5px;
+}
+
+#painel p:first-child{
+  margin-top: 50px;
+}
+
+h4{
+  margin: 10px 0;
 }
 </style>
