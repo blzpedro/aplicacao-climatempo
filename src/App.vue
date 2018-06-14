@@ -19,7 +19,7 @@ import Cabeca from './assets/components/shared/header/Cabeca.vue';
       * ENTRADA : Recebe o objeto da funcao geraJSON
       * SAIDA: 
       ***/
-/*function preencheDados(dados){
+function preencheDados(dados){
 
     var clima = dados;
     
@@ -70,7 +70,7 @@ import Cabeca from './assets/components/shared/header/Cabeca.vue';
     pNome.appendChild(imgClima);
     pNome.appendChild(pSigla);
     document.body.appendChild(divInfo);
-}*/
+}
 
 function preencheDados(dados){
   
@@ -86,9 +86,19 @@ function preencheDados(dados){
 
     var divInfo = document.createElement('div');
     divInfo.setAttribute('id', 'painel');
-    var pTemp =  document.createElement('p');
-    pTemp.innerHTML = "Temperatura: " + dados.list[x].main.temp.toFixed(1);
+    var pTemp = document.createElement('p');
+    var pTempmax = document.createElement('p');
+    var pTempmin = document.createElement('p');
+    var pDescricao = document.createElement('p');
+    var pUmidade = document.createElement('p');
+    var h2Data = document.createElement('h2');
+    pTemp.innerHTML = "Temperatura Atual:" + dados.list[x].main.temp.toFixed(1) + " C°";
+    pTempmax.innerHTML = "Temperatura Máxima: " + dados.list[x].main.temp_max.toFixed(1) + " C°";
+    pTempmin.innerHTML = "Temperatura Mínima: " + dados.list[x].main.temp_min.toFixed(1) + " C°";
     divInfo.appendChild(pTemp);
+    divInfo.appendChild(pTempmax);
+    divInfo.appendChild(pTempmin);
+    divInfo.appendChild(pUmidade);
     document.body.appendChild(divInfo);
  
 }
