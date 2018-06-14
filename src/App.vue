@@ -90,15 +90,17 @@ function preencheDados2(dados){
     var pTempmax = document.createElement('p');
     var pTempmin = document.createElement('p');
     var pUmidade = document.createElement('p');
-    var h2Data = document.createElement('h2');
-    h2Data.setAttribute('id', 'painel-titulo');
-    h2Data.setAttribute('style','height: 80px');
-    pTemp.innerHTML = "Temperatura Atual:" + dados.list[x].main.temp.toFixed(1) + " C°";
-    pTempmax.innerHTML = "Temperatura Máxima: " + dados.list[x].main.temp_max.toFixed(1) + " C°";
-    pTempmin.innerHTML = "Temperatura Mínima: " + dados.list[x].main.temp_min.toFixed(1) + " C°";
+    var h2Data = document.createElement('h4');
+    var h2Prev = document.createElement('h2');
+    h2Prev.setAttribute('id', 'painel-titulo');
+    h2Prev.innerHTML = "Previsão para:";
+    pTemp.innerHTML = "Temperatura atual:" + dados.list[x].main.temp.toFixed(1) + " C°";
+    pTempmax.innerHTML = "Temperatura máxima: " + dados.list[x].main.temp_max.toFixed(1) + " C°";
+    pTempmin.innerHTML = "Temperatura mínima: " + dados.list[x].main.temp_min.toFixed(1) + " C°";
     pUmidade.innerHTML = "Umidade: " + dados.list[x].main.humidity + "%";
     h2Data.innerHTML = data.substring(0,10);
-    divInfo.appendChild(h2Data);
+    divInfo.appendChild(h2Prev);
+    h2Prev.appendChild(h2Data);
     divInfo.appendChild(pTemp);
     divInfo.appendChild(pTempmax);
     divInfo.appendChild(pTempmin);
@@ -169,15 +171,16 @@ export default {
 </script>
 
 <style>
+
 *{
-box-sizing: border-box;
-}
+    box-sizing: border-box;
+    }
 body {
-font-family: Helvetica, Verdana;
-margin: 0;
-background-image: url("img/ceu.png");
-background-size: 100%;
-background-repeat: no-repeat;
+    font-family: Helvetica, Verdana;
+    margin: 0;
+    background-image: url("img/ceu.png");
+    background-size: 100%;
+    background-attachment: fixed;
 }
 
 #mid{
