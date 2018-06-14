@@ -19,6 +19,7 @@ import Cabeca from './assets/components/shared/header/Cabeca.vue';
       * ENTRADA : Recebe o objeto da funcao geraJSON
       * SAIDA: 
       ***/
+      
 function preencheDados(dados){
 
     var clima = dados;
@@ -71,6 +72,13 @@ function preencheDados(dados){
     document.body.appendChild(divInfoAtual);
 }
 
+      /***
+      * DESCRICAO: Essa funcao serve contador para criaDiv
+      * AUTOR: Henrique
+      * ENTRADA : Recebe o parametro da funcao criaDiv e da API 
+      * SAIDA: 
+      ***/
+      
 function preencheDados2(dados){
   
   for (var i = 0; i < dados.cnt; i++) { 
@@ -80,6 +88,14 @@ function preencheDados2(dados){
 
 }
 
+
+      /***
+      * DESCRICAO: Essa funcao recebe um json com os dados do clima da cidade pesquisada e cria um painel com as informações dos próximos 5 dias
+      * AUTOR: Henrique / Gabriel / Pedro
+      * ENTRADA : Recebe o objeto da funcao geraJSON
+      * SAIDA: 
+      ***/
+      
  function criaDiv(dados,x){
 
     var data = dados.list[x].dt_txt;
