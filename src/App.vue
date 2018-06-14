@@ -46,7 +46,7 @@ function preencheDados(dados){
     imgVento.src = "img/vento.png";
     imgTemp.src = "img/tempatual.ico";
     imgTempMin.src = "img/azul.png";
-    pNome.innerHTML = clima.city.name;
+    pNome.innerHTML = clima.city.name+ "(Atual)";
     pTemp.innerHTML = "Temperatura atual: " + clima.list[0].main.temp.toFixed(1);
     pTempmax.innerHTML = "Temperatura máxima: " + clima.list[0].main.temp_max.toFixed(1);
     pTempmin.innerHTML = "Temperatura mínima: " + clima.list[0].main.temp_min.toFixed(1);
@@ -93,19 +93,30 @@ function preencheDados2(dados){
     var h2Data = document.createElement('h4');
     var h2Prev = document.createElement('h2');
     h2Prev.setAttribute('id', 'painel-titulo');
+    var imgTemp = document.createElement('img');
+    var imgTempMin =  document.createElement('img');
+    var imgTempMax = document.createElement('img');
+    var imgUmidade = document.createElement('img');
     h2Prev.innerHTML = "Previsão para:";
     pTemp.innerHTML = "Temperatura atual:" + dados.list[x].main.temp.toFixed(1) + " C°";
     pTempmax.innerHTML = "Temperatura máxima: " + dados.list[x].main.temp_max.toFixed(1) + " C°";
     pTempmin.innerHTML = "Temperatura mínima: " + dados.list[x].main.temp_min.toFixed(1) + " C°";
     pUmidade.innerHTML = "Umidade: " + dados.list[x].main.humidity + "%";
+    imgTempMax.src = "img/max.png";
+    imgUmidade.src = "img/umidade.png";
+    imgTemp.src = "img/tempatual.ico";
+    imgTempMin.src = "img/azul.png";
     h2Data.innerHTML = data.substring(0,10);
     divInfo.appendChild(h2Prev);
     h2Prev.appendChild(h2Data);
     divInfo.appendChild(pTemp);
     divInfo.appendChild(pTempmax);
+    pTemp.appendChild(imgTemp);
+    pTempmax.appendChild(imgTempMax);
     divInfo.appendChild(pTempmin);
     divInfo.appendChild(pUmidade);
-    divInfo.appendChild(pUmidade);
+    pTempmin.appendChild(imgTempMin);
+    pUmidade.appendChild(imgUmidade);
     document.body.appendChild(divInfo);
  
 }
