@@ -3,7 +3,7 @@
     <cabeca></cabeca>
     <div id="mid">
       <input id="campo"  type="text" v-model="pesquisa" placeholder="ex: Santos">
-      <button v-on:click="geraJSON">Pesquisar</button>
+      <button v-on:click="geraJSON2">Pesquisar</button>
       <button v-on:click="limpar" >Limpar</button>
     </div>
   </div>
@@ -23,9 +23,8 @@ function preencheDados(dados){
 
     var clima = dados;
     
-    var divInfo = document.createElement('div');
-    var divTop = document.createElement('div');
-    divInfo.setAttribute('id', 'painel');
+    var divInfoAtual = document.createElement('div');
+    divInfoAtual.setAttribute('id', 'painel');
     var imgClima = document.createElement('img');
     var imgTemp = document.createElement('img');
     var imgTempMin =  document.createElement('img');
@@ -41,41 +40,40 @@ function preencheDados(dados){
     var pUmidade = document.createElement('p');
     var pVelvento = document.createElement('p');
     var pSigla = document.createElement('h4');
-    imgClima.src = "http://openweathermap.org/img/w/" +  clima.weather[0].icon + ".png"
+    imgClima.src = "http://openweathermap.org/img/w/" +  clima.list[0].weather[0].icon + ".png";
     imgTempMax.src = "img/max.png";
     imgUmidade.src = "img/umidade.png";
     imgVento.src = "img/vento.png";
     imgTemp.src = "img/tempatual.ico";
     imgTempMin.src = "img/azul.png";
-    pNome.innerHTML = clima.name;
-    pTemp.innerHTML = "Temperatura atual: " + clima.main.temp.toFixed(1);
-    pTempmax.innerHTML = "Temperatura máxima: " + clima.main.temp_max.toFixed(1);
-    pTempmin.innerHTML = "Temperatura mínima: " + clima.main.temp_min.toFixed(1);
-    pUmidade.innerHTML = "Umidade: " + clima.main.humidity +"%";
-    pVelvento.innerHTML = "Ventos: " + (3.6 * clima.wind.speed).toFixed(2) + " km/h";
-    pDescricao.innerHTML = "Descrição: " + clima.weather[0].description;
-    pSigla.innerHTML = clima.sys.country;
-    divInfo.appendChild(pNome);
-    divInfo.appendChild(pTemp);
+    pNome.innerHTML = clima.city.name;
+    pTemp.innerHTML = "Temperatura atual: " + clima.list[0].main.temp.toFixed(1);
+    pTempmax.innerHTML = "Temperatura máxima: " + clima.list[0].main.temp_max.toFixed(1);
+    pTempmin.innerHTML = "Temperatura mínima: " + clima.list[0].main.temp_min.toFixed(1);
+    pUmidade.innerHTML = "Umidade: " + clima.list[0].main.humidity +"%";
+    pVelvento.innerHTML = "Ventos: " + (3.6 * clima.list[0].wind.speed).toFixed(2) + " km/h";
+    pDescricao.innerHTML = "Descrição: " + clima.list[0].weather[0].description;
+    pSigla.innerHTML = clima.city.country;
+    divInfoAtual.appendChild(pNome);
+    divInfoAtual.appendChild(pTemp);
     pTemp.appendChild(imgTemp);
     pTempmax.appendChild(imgTempMax);
-    divInfo.appendChild(pTempmax);
-    divInfo.appendChild(pTempmin);
+    divInfoAtual.appendChild(pTempmax);
+    divInfoAtual.appendChild(pTempmin);
     pTempmin.appendChild(imgTempMin);
     pUmidade.appendChild(imgUmidade);
-    divInfo.appendChild(pUmidade);
-    divInfo.appendChild(pVelvento);
+    divInfoAtual.appendChild(pUmidade);
+    divInfoAtual.appendChild(pVelvento);
     pVelvento.appendChild(imgVento);
-    divInfo.appendChild(pDescricao);
+    divInfoAtual.appendChild(pDescricao);
     pNome.appendChild(imgClima);
     pNome.appendChild(pSigla);
-    document.body.appendChild(divInfo);
+    document.body.appendChild(divInfoAtual);
 }
 
-function preencheDados(dados){
+function preencheDados2(dados){
   
   for (var i = 0; i < dados.cnt; i++) { 
-    
     criaDiv(dados,i);
     i=i+7;
   }
@@ -84,20 +82,27 @@ function preencheDados(dados){
 
  function criaDiv(dados,x){
 
+    var data = dados.list[x].dt_txt;
+    
     var divInfo = document.createElement('div');
     divInfo.setAttribute('id', 'painel');
     var pTemp = document.createElement('p');
     var pTempmax = document.createElement('p');
     var pTempmin = document.createElement('p');
-    var pDescricao = document.createElement('p');
     var pUmidade = document.createElement('p');
     var h2Data = document.createElement('h2');
+    h2Data.setAttribute('id', 'painel-titulo');
+    h2Data.setAttribute('style','height: 80px');
     pTemp.innerHTML = "Temperatura Atual:" + dados.list[x].main.temp.toFixed(1) + " C°";
     pTempmax.innerHTML = "Temperatura Máxima: " + dados.list[x].main.temp_max.toFixed(1) + " C°";
     pTempmin.innerHTML = "Temperatura Mínima: " + dados.list[x].main.temp_min.toFixed(1) + " C°";
+    pUmidade.innerHTML = "Umidade: " + dados.list[x].main.humidity + "%";
+    h2Data.innerHTML = data.substring(0,10);
+    divInfo.appendChild(h2Data);
     divInfo.appendChild(pTemp);
     divInfo.appendChild(pTempmax);
     divInfo.appendChild(pTempmin);
+    divInfo.appendChild(pUmidade);
     divInfo.appendChild(pUmidade);
     document.body.appendChild(divInfo);
  
@@ -138,7 +143,8 @@ export default {
       * ENTRADA :
       * SAIDA: JSON
          ***/
-      geraJSON: function () {
+   
+    geraJSON2: function () {
       
         this.$http.get('http://api.openweathermap.org/data/2.5/forecast?q=' + this.pesquisa + '&APPID=d88c03f3eb8efe8c97422955694012c9&lang=pt&units=metric')
         .then(res => res.json())
@@ -147,15 +153,18 @@ export default {
           this.pesquisa ='';
           this.status='';
           document.getElementById('campo').value='';
-			    preencheDados(dados);
+          preencheDados(dados);
+          preencheDados2(dados);
 			
 			}, response => {
-               alert("Cidade não encontrada");
+                alert("A Cidade "+ this.pesquisa + " nao foi encontrada" );
+                document.getElementById('campo').value='';
         });
       
     }
-    
+
   }
+
 };
 </script>
 
