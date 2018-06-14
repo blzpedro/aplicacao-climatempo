@@ -19,7 +19,7 @@ import Cabeca from './assets/components/shared/header/Cabeca.vue';
       * ENTRADA : Recebe o objeto da funcao geraJSON
       * SAIDA: 
       ***/
-function preencheDados(dados){
+/*function preencheDados(dados){
 
     var clima = dados;
     
@@ -70,6 +70,27 @@ function preencheDados(dados){
     pNome.appendChild(imgClima);
     pNome.appendChild(pSigla);
     document.body.appendChild(divInfo);
+}*/
+
+function preencheDados(dados){
+  
+  for (var i = 0; i < dados.cnt; i++) { 
+    
+    criaDiv(dados,i);
+    i=i+7;
+  }
+
+}
+
+ function criaDiv(dados,x){
+
+    var divInfo = document.createElement('div');
+    divInfo.setAttribute('id', 'painel');
+    var pTemp =  document.createElement('p');
+    pTemp.innerHTML = "Temperatura: " + dados.list[x].main.temp.toFixed(1);
+    divInfo.appendChild(pTemp);
+    document.body.appendChild(divInfo);
+ 
 }
 
 
@@ -109,7 +130,7 @@ export default {
          ***/
       geraJSON: function () {
       
-        this.$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.pesquisa + '&APPID=d88c03f3eb8efe8c97422955694012c9&lang=pt&units=metric')
+        this.$http.get('http://api.openweathermap.org/data/2.5/forecast?q=' + this.pesquisa + '&APPID=d88c03f3eb8efe8c97422955694012c9&lang=pt&units=metric')
         .then(res => res.json())
         .then(dados => {
           
@@ -123,6 +144,7 @@ export default {
         });
       
     }
+    
   }
 };
 </script>
