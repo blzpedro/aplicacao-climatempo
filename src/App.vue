@@ -26,6 +26,7 @@ function preenchePainel(dados){
     
     var divInfoAtual = document.createElement('div');
     divInfoAtual.setAttribute('id', 'painel');
+    divInfoAtual.setAttribute('class', 'principal');
     var imgClima = document.createElement('img');
     var imgTemp = document.createElement('img');
     var imgTempMin =  document.createElement('img');
@@ -34,20 +35,23 @@ function preenchePainel(dados){
     var imgVento = document.createElement('img');
     var pNome = document.createElement('h2');
     pNome.setAttribute('id', 'painel-titulo');
+    pNome.setAttribute('class', 'pnome')
     var pTemp = document.createElement('p');
     var pTempmax = document.createElement('p');
     var pTempmin = document.createElement('p');
     var pDescricao = document.createElement('p');
+    pDescricao.setAttribute('style', 'margin-left:37%');
     var pUmidade = document.createElement('p');
     var pVelvento = document.createElement('p');
     var pSigla = document.createElement('h4');
+    pSigla.setAttribute('style', 'display: inline; margin: 10px;')
     imgClima.src = "http://openweathermap.org/img/w/" +  clima.list[0].weather[0].icon + ".png";
     imgTempMax.src = "img/max.png";
     imgUmidade.src = "img/umidade.png";
     imgVento.src = "img/vento.png";
     imgTemp.src = "img/tempatual.ico";
     imgTempMin.src = "img/azul.png";
-    pNome.innerHTML = clima.city.name+ "(Atual)";
+    pNome.innerHTML = clima.city.name;
     pTemp.innerHTML = "Temperatura atual: " + clima.list[0].main.temp.toFixed(1);
     pTempmax.innerHTML = "Temperatura máxima: " + clima.list[0].main.temp_max.toFixed(1);
     pTempmin.innerHTML = "Temperatura mínima: " + clima.list[0].main.temp_min.toFixed(1);
@@ -81,7 +85,7 @@ function preenchePainel(dados){
       
   function preenchePainelPrevisao(dados){
     
-    for (var i = 0; i < dados.cnt; i++) { 
+    for (var i = 8; i < dados.cnt; i++) { 
       criaPainel(dados,i);
       i=i+7;
     }
@@ -127,6 +131,7 @@ function preenchePainel(dados){
     
     var divInfo = document.createElement('div');
     divInfo.setAttribute('id', 'painel');
+    divInfo.setAttribute('style', 'margin: 30px 10px 0 5%;')
     var pTemp = document.createElement('p');
     var pTempmax = document.createElement('p');
     var pTempmin = document.createElement('p');
@@ -139,7 +144,7 @@ function preenchePainel(dados){
     var imgTempMax = document.createElement('img');
     var imgUmidade = document.createElement('img');
     h2Prev.innerHTML = "Previsão para:";
-    pTemp.innerHTML = "Temperatura atual:" + dados.list[x].main.temp.toFixed(1) + " C°";
+    pTemp.innerHTML = "Temperatura média: " + dados.list[x].main.temp.toFixed(1) + " C°";
     pTempmax.innerHTML = "Temperatura máxima: " + dados.list[x].main.temp_max.toFixed(1) + " C°";
     pTempmin.innerHTML = "Temperatura mínima: " + dados.list[x].main.temp_min.toFixed(1) + " C°";
     pUmidade.innerHTML = "Umidade: " + dados.list[x].main.humidity + "%";
@@ -266,10 +271,8 @@ input{
     padding: 0 auto;
     border: solid 2px grey;
     display: inline-block;
-    margin: 5px;
     box-shadow: 3px 5px 5px grey;
-    width: 250px;
-    height: 420px;
+    height: auto;
     vertical-align: top;
     text-align: center;
     background-color: #d9d9d9;
@@ -302,9 +305,9 @@ div p{
 
 h2 img{
     float: left;
-    height: 40px;
-    width: 50px;
-    margin-right: -5px;
+    height: 100px;
+    width: 100px;
+    margin-right: -80px;
 }
 
 #painel p img{
@@ -312,8 +315,8 @@ h2 img{
   bottom: 10px;
   width: 30px;
   float: left;
-  margin-left: -10px;
   margin-right: 5px;
+  margin-top: 7px;
 }
 
 #painel p:first-child{
@@ -322,5 +325,28 @@ h2 img{
 
 h4{
   margin: 10px 0;
+}
+
+.principal{
+  width: 70%;
+  margin: 20px 15%;
+}
+
+.principal p{
+  font-size: 22px;
+  margin: 3px;
+}
+
+.principal p img{
+  margin-left: 33%;
+}
+
+.pnome{
+  font-size: 35px;
+}
+
+.pnome h2{
+  position: relative;
+  top: 20px;
 }
 </style>
