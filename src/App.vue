@@ -3,7 +3,7 @@
     <cabeca></cabeca>
     <div id="mid">
       <input id="campo"  type="text" v-model="pesquisa" placeholder="ex: Santos">
-      <button v-on:click="geraJSON2">Pesquisar</button>
+      <button v-on:click="geraJSON">Pesquisar</button>
       <button v-on:click="limpar" >Limpar</button>
     </div>
   </div>
@@ -20,7 +20,7 @@ import Cabeca from './assets/components/shared/header/Cabeca.vue';
       * SAIDA: 
       ***/
       
-function preencheDados(dados){
+function preenchePainel(dados){
 
     var clima = dados;
     
@@ -73,30 +73,55 @@ function preencheDados(dados){
 }
 
       /***
-      * DESCRICAO: Essa funcao serve contador para criaDiv
+      * DESCRICAO: Essa funcao percorre o JSON
       * AUTOR: Henrique
       * ENTRADA : Recebe o parametro da funcao criaDiv e da API 
       * SAIDA: 
       ***/
       
-function preencheDados2(dados){
+  function preenchePainelPrevisao(dados){
+    
+    for (var i = 0; i < dados.cnt; i++) { 
+      criaPainel(dados,i);
+      i=i+7;
+    }
   
-  for (var i = 0; i < dados.cnt; i++) { 
-    criaDiv(dados,i);
-    i=i+7;
   }
 
-}
+
+      /***
+      * DESCRICAO: Como a api retorna a data no formato AA/MM/DD essa funcao ira converter para DD/MM
+      * AUTOR: Henrique / Gabriel
+      * ENTRADA : Recebe o JSON e um contador
+      * SAIDA: Retorna a data convertida
+      ***/  
+  function converteData(dados,x){
+  
+    var data = dados.list[x].dt_txt.substring(5,10);
+    var mes='';
+    var dia='';
+    
+    for(var i = 3 ; i <= 4; i++){
+          dia = dia + data[i];
+    }
+    
+    for(var i = 0 ; i < 2; i++){
+          mes = mes + data[i];
+    }
+  
+    return (dia + '/' + mes);
+    
+  }
 
 
       /***
       * DESCRICAO: Essa funcao recebe um json com os dados do clima da cidade pesquisada e cria um painel com as informações dos próximos 5 dias
       * AUTOR: Henrique / Gabriel / Pedro
-      * ENTRADA : Recebe o objeto da funcao geraJSON
+      * ENTRADA : Recebe o objeto da funcao geraJSON e o indice do objeto JSON
       * SAIDA: 
       ***/
       
- function criaDiv(dados,x){
+ function criaPainel(dados,x){
 
     var data = dados.list[x].dt_txt;
     
@@ -122,7 +147,7 @@ function preencheDados2(dados){
     imgUmidade.src = "img/umidade.png";
     imgTemp.src = "img/tempatual.ico";
     imgTempMin.src = "img/azul.png";
-    h2Data.innerHTML = data.substring(0,10);
+    h2Data.innerHTML = converteData(dados,x);
     divInfo.appendChild(h2Prev);
     h2Prev.appendChild(h2Data);
     divInfo.appendChild(pTemp);
@@ -173,7 +198,7 @@ export default {
       * SAIDA: JSON
          ***/
    
-    geraJSON2: function () {
+    geraJSON: function () {
       
         this.$http.get('http://api.openweathermap.org/data/2.5/forecast?q=' + this.pesquisa + '&APPID=d88c03f3eb8efe8c97422955694012c9&lang=pt&units=metric')
         .then(res => res.json())
@@ -182,8 +207,8 @@ export default {
           this.pesquisa ='';
           this.status='';
           document.getElementById('campo').value='';
-          preencheDados(dados);
-          preencheDados2(dados);
+          preenchePainel(dados);
+          preenchePainelPrevisao(dados);
 			
 			}, response => {
                 alert("A Cidade "+ this.pesquisa + " nao foi encontrada" );
